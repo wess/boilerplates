@@ -1,0 +1,6 @@
+.dist
+.DS_Store
+node_modules
+elm-stuff
+_build/*
+!_build/.gitkeep
