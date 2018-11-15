@@ -1,51 +1,65 @@
 //
 //  console.swift
-//  Culprit
 //
 //  Created by Wess Cope on 1/22/18.
 //  Copyright © 2018 WessCope. All rights reserved.
 //
 
-import Foundation
+public struct console {
+  private static let infoCharacter    = "ℹ️ "
+  private static let debugCharacter   = "🐞 "
+  private static let successCharacter = "✅ "
+  private static let warningCharacter = "⚠️ "
+  private static let errorCharacter   = "❗️ "
+  private static let fatalCharacter   = "‼️ "
 
-struct console {
-  private static let infoCharacter    = "ℹ️"
-  private static let debugCharacter   = "🐞"
-  private static let successCharacter = "✅"
-  private static let warningCharacter = "⚠️"
-  private static let errorCharacter   = "❗️"
-  private static let fatalCharacter   = "‼️"
 
-  static let log = console.info
-  
-  static func info(_ args:String...) {
-    console.safePrint(
-      (infoCharacter + " : " + buildMessage(args))
-    )
+  public static func info(_ args:Any..., line:Int = #line, file:String = #file, function:String = #function) {
+    #if DEBUG
+    console.safePrint((infoCharacter + " \(line) : \((file.split(separator: "/").last ?? "")) : \(function) :: " + buildMessage(args)))
+    #else
+    safePrint(buildMessage(args))
+    #endif
+  }
+
+  public static func log(_ args:Any..., line:Int = #line, file:String = #file, function:String = #function) {
+    #if DEBUG
+    console.safePrint((infoCharacter + " \(line) : \((file.split(separator: "/").last ?? "")) : \(function) :: " + buildMessage(args)))
+    #else
+    safePrint(buildMessage(args))
+    #endif
+  }
+
+  public static func debug(_ args:Any..., line:Int = #line, file:String = #file, function:String = #function) {
+    #if DEBUG
+    console.safePrint((debugCharacter + " \(line) : \((file.split(separator: "/").last ?? "")) : \(function) :: " + buildMessage(args)))
+    #else
+    safePrint(buildMessage(args))
+    #endif
   }
   
-  static func debug(_ args:String...) {
-    console.safePrint(
-      (debugCharacter + " : " + buildMessage(args))
-    )
+  public static func success(_ args:Any..., line:Int = #line, file:String = #file, function:String = #function) {
+    #if DEBUG
+    console.safePrint((successCharacter + " \(line) : \((file.split(separator: "/").last ?? "")) : \(function) :: " + buildMessage(args)))
+    #else
+    safePrint(buildMessage(args))
+    #endif
   }
   
-  static func success(_ args:String...) {
-    console.safePrint(
-      (successCharacter + " : " + buildMessage(args))
-    )
+  public static func warning(_ args:Any..., line:Int = #line, file:String = #file, function:String = #function) {
+    #if DEBUG
+    console.safePrint((warningCharacter + " \(line) : \((file.split(separator: "/").last ?? "")) : \(function) :: " + buildMessage(args)))
+    #else
+    safePrint(buildMessage(args))
+    #endif
   }
   
-  static func warning(_ args:String...) {
-    console.safePrint(
-      (warningCharacter + " : " + buildMessage(args))
-    )
-  }
-  
-  static func error(_ args:String...) {
-    console.safePrint(
-      (errorCharacter + " : " + buildMessage(args))
-    )
+  public static func error(_ args:Any..., line:Int = #line, file:String = #file, function:String = #function) {
+    #if DEBUG
+    console.safePrint((errorCharacter + " \(line) : \((file.split(separator: "/").last ?? "")) : \(function) :: " + buildMessage(args)))
+    #else
+    safePrint(buildMessage(args))
+    #endif
   }
   
   private static func buildMessage(_ args:[Any]) -> String {
@@ -57,11 +71,6 @@ struct console {
   }
   
   private static func safePrint(_ message:String) {
-    #if DEBUG
-      
-      print(message)
-      
-    #endif
+    print(message)
   }
 }
-
