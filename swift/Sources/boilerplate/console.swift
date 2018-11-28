@@ -1,8 +1,8 @@
 //
 //  console.swift
-//
-//  Created by Wess Cope on 1/22/18.
-//  Copyright © 2018 WessCope. All rights reserved.
+// 
+//  Created by Wess Cope (me@wess.io) on 08/01/18
+//  Copyright 2018 WessCope
 //
 
 public struct console {
