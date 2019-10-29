@@ -5,14 +5,14 @@ PROJECT_DIR  := $(notdir $(patsubst %/,%,$(dir $(ROOT_DIR))))
 PROJECT 		 := $(lastword $(PROJECT_DIR))
 VERSION_FILE	= VERSION
 VERSION				= `cat $(VERSION_FILE)`
-BUILD_DIR			= _build
+BUILD_DIR 		= ".build"
 
 all: build
 
 run: build
 	@echo "Running $(PROJECT)..." \
 	&& echo "" 										\
-	&& ./_build/bin/$(PROJECT)
+	&& $(BUILD_DIR)/bin/$(PROJECT)
 
 build: clean
 	@cd $(BUILD_DIR) 									\

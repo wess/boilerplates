@@ -9,7 +9,7 @@ var gulp      = require('gulp'),
     fs        = require('fs'),
     del       = require('del'),
     sequence = require('run-sequence')
-    buildDir  = "_build";
+    buildDir  = ".build";
     
 gulp.task('vendor', function(){
   return gulp.src([

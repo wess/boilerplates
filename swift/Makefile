@@ -13,16 +13,16 @@ build:
 	@swift build 
 
 install:
-	@mv .build/release/$(PROJECT) /usr/local/bin/
+	@mv $(BUILD_DIR)/release/$(PROJECT) /usr/local/bin/
 
 clean:
 	@swift package clean \
-	 && rm -rf .build \
-	 && mkdir .build \
-	 && touch .build/.gitkeep
+	 && rm -rf $(BUILD_DIR) \
+	 && mkdir $(BUILD_DIR) \
+	 && touch $(BUILD_DIR)/.gitkeep
 
 run: build
-	@.build/debug/$(PROJECT)
+	@$(BUILD_DIR)/debug/$(PROJECT)
 
 release: clean
 	@swift build --configuration release
