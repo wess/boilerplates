@@ -3,9 +3,11 @@
 # Edit at https://www.gitignore.io/?templates=elm,c++,node,swift,macos
 
 ### Specifics ###
+dist
 .dist
 _build
 .build
+.cache
 
 ### C++ ###
 # Prerequisites
