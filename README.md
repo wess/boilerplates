@@ -6,3 +6,5 @@
 - Static Website
 - Typescript
   - Express
+  - Frontend
+  - Electron
