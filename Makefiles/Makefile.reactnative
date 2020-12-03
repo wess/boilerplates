@@ -1,0 +1,52 @@
+.PHONY: test
+
+ROOT_DIR 	   := $(abspath $(lastword $(MAKEFILE_LIST)))
+PROJECT_DIR	 := $(notdir $(patsubst %/,%,$(dir $(ROOT_DIR))))
+PROJECT 		 := $(lastword $(PROJECT_DIR))
+VERSION_FILE 	= VERSION
+VERSION			 	= `cat $(VERSION_FILE)`
+PKG_DIR 			= "node_modules"
+
+RUN_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
+$(eval $(RUN_ARGS):;@:)
+
+#### COMMANDS
+
+default: run
+
+.PHONY: help
+help: ## Print all the available commands
+	@echo "" \
+	&& grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
+	  awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}' \
+	&& echo ""
+
+
+rm: ## Removes all cache, dependencies and watching processes
+	@yarn cache clean \
+	&& watch-del-all \
+	&& rm -rf __tests__ \
+	&& rm -rf node_modules \
+	&& rm -rf yarn.lock
+
+install:  ## Installs all dependencies.
+	@yarn install --check-files
+
+clean: rm install ## Cleans and rebuilds environment
+
+run-ios:  ## Run app on iOS
+	@expo start --dev --ios --no-https
+
+run-android:  ## Run app on android
+	@expo start --dev --android --no-https
+
+run-blank:  ## Run console without launching for specific platform
+	@expo start
+
+run: run-ios ## Default run for development
+
+diagnostics:  ## Log environment info to the console
+	@expo diagnostics
+
+doctor:  ## Diagnose issues with the project
+	@expo doctor
