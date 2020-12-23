@@ -1,0 +1,11 @@
+{
+  "psi-header.config": {
+
+  },
+  "psi-header.variables": [
+    ["projectname", "Spose"],
+    ["author", "Wess"],
+    ["authoremail", "me@wess.io"],
+    ["company", "Wess.io"]
+  ]
+}
