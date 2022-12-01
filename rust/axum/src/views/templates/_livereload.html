@@ -1,0 +1,17 @@
+<script type="module">
+  const retry = (it) =>
+    fetch(it, {{ cache: "no-store" }})
+      .then(() => console.log("[tower-livereload] reload..."))
+      .then(() => window.location.reload())
+      .catch(() => setTimeout(() => retry(it), 1000));
+
+  const main = async () =>
+    fetch("{long_poll}", {{ cache: "no-store" }})
+      .then((it) => it.text().catch(() => null))
+      .catch(() => null)
+      .then(() => console.log("[tower-livereload] disconnected..."))
+      .then(() => retry("{back_up}"));
+
+  console.log("[tower-livereload] connected...");
+  main();
+</script>

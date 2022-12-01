@@ -1,0 +1,6 @@
+*.scss
+*.ts
+*.tsx
+*.js
+*.html
+**/frontend/*
